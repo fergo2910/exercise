@@ -1,14 +1,60 @@
 version: '3'
 
 services:
-  db:
+  consul:
+    image: consul
+    ports:
+      - "8300:8300"
+      - "8400:8400"
+      - "8500:8500"
+    links:
+      - redis
+    networks:
+      - back-tier
+
+  redis:
     image: redis
-  web_app:
+    ports:
+      - "6379:6379"
+    networks:
+      - back-tier
+
+  web_app_01:
     build: .
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code_web_app
     ports:
       - "8000:8000"
-    depends_on:
-      - db
+    networks:
+      - front-tier
+      - back-tier
+
+  web_app_02:
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:9000
+    volumes:
+      - .:/code_web_app
+    ports:
+      - "9000:9000"
+    networks:
+      - front-tier
+      - back-tier
+
+  lb:
+    image: dockercloud/haproxy
+    ports:
+      - 80:80
+    links:
+      - web_app_01
+      - web_app_02
+    networks:
+      - front-tier
+    volumes:
+      - //var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  front-tier:
+    driver: bridge
+  back-tier:
+    driver: bridge
