@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE HTML>
 <!--
 	Landed by HTML5 UP
@@ -10,7 +11,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 	</head>
@@ -19,12 +20,12 @@
 
 			<!-- Header -->
 				<header id="header">
-					<h1 id="logo"><a href="index.html">FARMERS MARKET</a></h1>
+					<h1 id="logo"><a href="home">FARMERS MARKET</a></h1>
 					<nav id="nav">
 						<ul>
-							<li><a href="index.html">Home</a></li>
+							<li><a href="home">Home</a></li>
 							<!--li><a href="elements.html">Add Product</a></li-->
-							<li><a href="elements.html">Show Products</a></li>
+							<li><a href="elements">Show Products</a></li>
 						</ul>
 					</nav>
 				</header>
@@ -37,11 +38,11 @@
 							<p>*The products listed below may vary according to the season</p>
 						</header>
 
-						
+
 
 						<!-- Table -->
 							<section>
-								
+
 								<h4>Alternate</h4>
 								<div class="table-wrapper">
 									<table class="alt">
@@ -83,7 +84,7 @@
 								</div>
 							</section>
 
-						
+
 
 						<!-- Form -->
 							<section>
@@ -100,14 +101,14 @@
 											<ul class="actions">
 												<li><a href="#" class="button special icon fa-download">Add</a></li>
 												<li><input type="reset" value="Reset" /></li>
-												
+
 											</ul>
 										</div>
 									</div>
 								</form>
 							</section>
 
-						
+
 
 					</div>
 				</div>
@@ -129,14 +130,14 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'assets/js/skel.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
 
 	</body>
 </html>
