@@ -4,6 +4,7 @@ var responseTime = require('response-time')
 var bodyParser = require('body-parser')
 var axios = require('axios');
 var redis = require('redis');
+var consul = require('consul');
 
 // create a new redis client and connect to our local redis instance
 var client = redis.createClient();
@@ -11,6 +12,31 @@ var client = redis.createClient();
 // if an error occurs, print it to the console
 client.on('error', function (err) {
     console.log("Error " + err);
+});
+
+// create a new consul client and connect to the consul instance
+var consul = new consul({
+  host: 'consul',
+  port: 8500,
+});
+
+// register service to the consul agent
+let options = {
+  "Name": 'service_api',
+  "ID": 'service_api',
+  "Tags": [ "primary", "v1" ],
+  "Address": "node_api",
+  "Port": 7000,
+	"Check": {
+		"id": "ping",
+		"HTTP": "http://node_api:7000/ping",
+		"Interval": "10s",
+		"timeout": "5s"
+   }
+};
+
+consul.agent.service.register(options, function(err) {
+  if (err) throw err;
 });
 
 app.set('port', (process.env.PORT || 7000));
@@ -33,7 +59,7 @@ app.post('/api/product', function(req, res) {
   });
 });
 
-app.get('/api/:product', function(req, res){
+app.get('/api/product/:product', function(req, res){
   var key = req.params.product;
   client.get(key, function(error, result) {
       if (result) {
@@ -44,8 +70,30 @@ app.get('/api/:product', function(req, res){
   });
 });
 
+app.get('/api/all', function (req, res) {
+    var products = [];
+    client.keys('*', function (err, keys) {
+        if (err) return console.log(err);
+        if(keys){
+            async.map(keys, function(key, cb) {
+               client.get(key, function (error, value) {
+                    if (error) return cb(error);
+                    var job = {};
+                    products['productId']=key;
+                    products['price']=value;
+                    cb(null, job);
+                });
+            }, function (error, results) {
+               if (error) return console.log(error);
+               console.log(results);
+               res.json({data:results});
+            });
+        }
+    });
+});
+
 app.get('/ping', function(req, res) {
-  res.send({ "ping": "pong" });
+  res.send("pong");
 });
 
 app.listen(app.get('port'), function(){
