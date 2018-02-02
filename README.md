@@ -25,7 +25,8 @@ Also you can run the commands.
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 docker images
-docker rmi $(docker images -q)
+docker rmi exercise_web_app_01
+docker rmi exercise_web_app_02
 ```
 So you can start from scratch.
 

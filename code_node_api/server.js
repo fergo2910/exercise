@@ -5,6 +5,7 @@ var bodyParser = require('body-parser')
 var axios = require('axios');
 var redis = require('redis');
 var consul = require('consul');
+const async = require ('async')
 
 // create a new redis client and connect to our local redis instance
 var client = redis.createClient();
