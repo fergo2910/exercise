@@ -7,16 +7,28 @@ services:
       - "8300:8300"
       - "8400:8400"
       - "8500:8500"
-    links:
-      - redis
     networks:
-      - back-tier
+      - front-tier
 
   redis:
     image: redis
+    command: redis-server --appendonly yes
+    volumes:
+      - //c/Users/fjgonzalez/Music/data:/data
     ports:
       - "6379:6379"
     networks:
+      - back-tier
+
+  node_api:
+    image: node
+    command: node /usr/src/code_node_api/server.js
+    volumes:
+      - .:/usr/src
+    ports:
+      - "7000:7000"
+    networks:
+      - front-tier
       - back-tier
 
   web_app_01:
@@ -28,7 +40,6 @@ services:
       - "8000:8000"
     networks:
       - front-tier
-      - back-tier
 
   web_app_02:
     build: .
@@ -39,7 +50,6 @@ services:
       - "9000:9000"
     networks:
       - front-tier
-      - back-tier
 
   lb:
     image: dockercloud/haproxy

@@ -37,10 +37,19 @@
 							<h2>PRODUCTS WE OFFER</h2>
 							<p>*The products listed below may vary according to the season</p>
 						</header>
-
-
-
-						<!-- Table -->
+						<!-- Form -->
+							<section>
+								<h3>Add Product</h3>
+								<form method="post" novalidate>
+									{% csrf_token %}
+									{{ form }}
+									<ul class="actions">
+									<li><button type="submit" class="button special icon fa-download">Submit</button></li>
+									<li><input type="reset" value="Reset" /></li>
+									<ul class="actions">
+								</form>
+							</section>
+							<!-- Table -->
 							<section>
 
 								<h4>Alternate</h4>
@@ -48,34 +57,28 @@
 									<table class="alt">
 										<thead>
 											<tr>
-												<th>Code</th>
 												<th>Product</th>
 												<th>Price per Pound ($)</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
-												<td>CD001</td>
 												<td>Asparagus</td>
 												<td>29.99</td>
 											</tr>
 											<tr>
-												<td>CD002</td>
 												<td>Black Beans</td>
 												<td>19.99</td>
 											</tr>
 											<tr>
-												<td>CD003</td>
 												<td>Brussels	Sprouts</td>
 												<td>29.99</td>
 											</tr>
 											<tr>
-												<td>CD004</td>
 												<td>Celery</td>
 												<td>19.99</td>
 											</tr>
 											<tr>
-												<td>CD005</td>
 												<td>Lettuce</td>
 												<td>29.99</td>
 											</tr>
@@ -83,33 +86,6 @@
 									</table>
 								</div>
 							</section>
-
-
-
-						<!-- Form -->
-							<section>
-								<h3>Add Product</h3>
-								<form method="post" action="#">
-									<div class="row uniform 50%">
-										<div class="12u$">
-											<input type="text" name="name" id="name" value="" placeholder="Name" />
-										</div>
-										<div class="12u$">
-											<input type="text" name="Price" id="Price" value="" placeholder="Price" />
-										</div>
-										<div class="12u$">
-											<ul class="actions">
-												<li><a href="#" class="button special icon fa-download">Add</a></li>
-												<li><input type="reset" value="Reset" /></li>
-
-											</ul>
-										</div>
-									</div>
-								</form>
-							</section>
-
-
-
 					</div>
 				</div>
 
