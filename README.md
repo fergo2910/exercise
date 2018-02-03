@@ -18,6 +18,10 @@ volumes:
 ```
 For Node.js app to recognize redis, Node.js calls redis with the hostname in the  `code_node_api/node_modules/redis/index.js` where is define the port and the host (line 70).
 
+### RUNNING THE APP
+Una vez que el ambiente esté funcionando se debe ejecutar la siguinte url: `localhost/exercise_redis/home`.
+In the `localhost/exercise_redis/elements` you can add products and search products.
+
 ### CLEANING UP
 When you want to try new changes into code, you need stop docker-compose with `Ctrl + C` and remove the images that were created with the docker-compose.
 Also you can run the commands.

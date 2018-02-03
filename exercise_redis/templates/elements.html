@@ -61,37 +61,22 @@
 							</section>
 							<!-- Table -->
 							<section>
-
 								<h4>Alternate</h4>
 								<div class="table-wrapper">
 									<table class="alt">
 										<thead>
 											<tr>
 												<th>Product</th>
-												<th>Price per Pound ($)</th>
+												<th>Price ($)</th>
 											</tr>
 										</thead>
 										<tbody>
+											{% for product in fetch_products %}
 											<tr>
-												<td>Asparagus</td>
-												<td>29.99</td>
+												<td>{{ product.key }}</td>
+												<td>{{ product.value }}</td>
 											</tr>
-											<tr>
-												<td>Black Beans</td>
-												<td>19.99</td>
-											</tr>
-											<tr>
-												<td>Brussels	Sprouts</td>
-												<td>29.99</td>
-											</tr>
-											<tr>
-												<td>Celery</td>
-												<td>19.99</td>
-											</tr>
-											<tr>
-												<td>Lettuce</td>
-												<td>29.99</td>
-											</tr>
+											{% endfor %}
 										</tbody>
 									</table>
 								</div>

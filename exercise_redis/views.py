@@ -21,8 +21,6 @@ def elements(request):
     data_service = json.loads(json_service)
     #set the url to use de api from consul
     url = "http://"+data_service["ServiceAddress"]+":"+str(data_service["ServicePort"])
-    #get all products
-    fetch_products = requests.get(url+"/api/all")
     #print(fetch_products.json())
     if request.method == 'POST':
         if '_add' in request.POST:
@@ -48,4 +46,6 @@ def elements(request):
     else:
         form = ProductForm()
         search = SearchProductForm()
-    return render(request, 'elements.html', {'form': form,'search': search})
+    #get all products
+    fetch_products = requests.get(url+"/api/all")
+    return render(request, 'elements.html', {'form': form,'search': search, 'fetch_products': fetch_products.json()})
