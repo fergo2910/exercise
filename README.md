@@ -29,22 +29,3 @@ docker rmi exercise_web_app_01
 docker rmi exercise_web_app_02
 ```
 So you can start from scratch.
-
-
-{
-  "ID": "insert",
-  "Name": "insert",
-  "Tags": [
-    "primary",
-    "v1"
-  ],
-  "Address": "node_api",
-  "Port": 7000,
-  "EnableTagOverride": false,
-  "Check": {
-		"id": "ping",
-    "HTTP": "http://node_api:7000/ping",
-    "Interval": "10s",
-		"timeout": "5s"
-  }
-}

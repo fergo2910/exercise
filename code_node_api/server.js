@@ -64,9 +64,9 @@ app.get('/api/product/:product', function(req, res){
   var key = req.params.product;
   client.get(key, function(error, result) {
       if (result) {
-        res.send({ "price": result });
+        res.send(result);
       } else {
-        res.send({ "price": "not set" });
+        res.send("not set");
       }
   });
 });
@@ -79,15 +79,14 @@ app.get('/api/all', function (req, res) {
             async.map(keys, function(key, cb) {
                client.get(key, function (error, value) {
                     if (error) return cb(error);
-                    var job = {};
-                    products['productId']=key;
-                    products['price']=value;
-                    cb(null, job);
+                    var products = {};
+                    products['key']=key;
+                    products['value']=value;
+                    cb(null, products);
                 });
             }, function (error, results) {
                if (error) return console.log(error);
-               console.log(results);
-               res.json({data:results});
+               res.send(results);
             });
         }
     });

@@ -44,8 +44,18 @@
 									{% csrf_token %}
 									{{ form }}
 									<ul class="actions">
-									<li><button type="submit" class="button special icon fa-download">Submit</button></li>
+									<li><button name="_add" type="submit" class="button special icon fa-download">Submit</button></li>
 									<li><input type="reset" value="Reset" /></li>
+									<ul class="actions">
+								</form>
+							</section>
+							<section>
+								<h3>Search Product</h3>
+								<form method="post" novalidate>
+									{% csrf_token %}
+									{{ search }}
+									<ul class="actions">
+									<li><button name="_search" type="submit" class="button special icon fa-download">Submit</button></li>
 									<ul class="actions">
 								</form>
 							</section>
