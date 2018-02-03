@@ -20,7 +20,7 @@ volumes:
 For Node.js app to recognize redis, Node.js calls redis with the hostname in the  `code_node_api/node_modules/redis/index.js` where is define the port and the host (line 70).
 
 ### RUNNING THE APP
-Una vez que el ambiente esté funcionando se debe ejecutar la siguinte url: `localhost/exercise_redis/home`.
+Once the environment is working, the following url should be executed: `localhost/exercise_redis/home`.
 In the `localhost/exercise_redis/elements` you can add products and search products.
 
 ### CLEANING UP
@@ -35,21 +35,22 @@ docker rmi exercise_web_app_02
 ```
 So you can start from scratch.
 
-# DEPLOY WITH EC2
-If you want the same enviroment in cloud you could run a EC2 service with the following steps.
-1.  Go to your aws console and EC2 service.
-2.  Generate a Key-pair to connect to an EC2 Instance.
-3.  This will save a *<file>.pem* file with a rsa key. Save this key into your root project.
-4.  change the privileges of the *<file>.pem* with the command `chmod 400 <file>.pem` so the key wont be modifiable, only readable.
-5.  Now, you need to create a user in your aws account.
-  1.  Go to your console
-  2.  Go to IAM service
-  3.  Users, and create a user and save the public and secrete keys of the user.
+# DEPLOY WITH CFN
+If you want the same enviroment in cloud you could run a CFN service with the following steps.
+1. Go to your aws console and EC2 service.
+2. Generate a` Key-pair` to connect to an EC2 Instance.
+3. This will save a `key.pem` file with a rsa key. Save this key into your root project.
+4. change the privileges of the `key.pem` with the command `chmod 400 key.pem` so the key wont be modifiable, only readable.
+5. Now, you need to create a user in your aws account.
+   1. Go to your console
+   2.  Go to IAM service
+   3.  Users, and create a user and save the public and secrete keys of the user.
 6.  Set up a profile for aws-cli with the command `aws configure --profile exercise`
-  1.  Enter the public key of the created user
-  2.  Enter the private key of the created user
-  3.  Choose your region
-  4.  You can leave the default format in blank
+1. Item 3
+   1. Enter the public key of the created user
+   2.  Enter the private key of the created user
+   3.  Choose your region
+   4.  You can leave the default format in blank
 7.  Now with aws configured run, the following command to create the CloudFormation stack in AWS.
 ```
 aws cloudformation create-stack --stack-name some-stack --template-body file://$PWD/stack.yml --profile exercise --region us-west-2
@@ -65,4 +66,4 @@ docker -H tcp://<public ip>:2375 volume create \
   --opt backing=relocatable \
   data-volume-1
 ```
-10. Finally, you can run docker-compose -H tcp://<public ip>:2375 up -f aws-docker-compose.yml
+10. Finally, you can run docker-compose -H tcp://public_ip:2375 up -f aws-docker-compose.yml
