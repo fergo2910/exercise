@@ -49,10 +49,10 @@ It was developed in this way to define the difference between Frontend and Backe
 
 <details>
   <summary>Redis</summary>
-  <p>Images: redis:latest</p>
-  <p>Using its default configuration and storing information persistently outside the container.</p>
-  <p>Hostname within back-tier network: 'redis'</p>
-  <p>Visible port for tests: 6379</p>
+  * Images: redis:latest
+  * Using its default configuration and storing information persistently outside the container.
+  * Hostname within back-tier network: 'redis'
+  * Visible port for tests: 6379
 </details>
 
 <details>
