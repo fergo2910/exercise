@@ -97,27 +97,18 @@ If you want the same enviroment in cloud you could run a CFN service with the fo
 4. change the privileges of the `key.pem` with the command `chmod 400 key.pem` so the key wont be modifiable, only readable.
 5. Now, you need to create a user in your aws account.
    1. Go to your console
-   2.  Go to IAM service
-   3.  Users, and create a user and save the public and secrete keys of the user.
+   2. Go to IAM service
+   3. Users, and create a user and save the public and secrete keys of the user.
 6.  Set up a profile for aws-cli with the command `aws configure --profile exercise`
-1. Item 3
    1. Enter the public key of the created user
-   2.  Enter the private key of the created user
-   3.  Choose your region
-   4.  You can leave the default format in blank
+   2. Enter the private key of the created user
+   3. Choose your region
+   4. You can leave the default format in blank
 7.  Now with aws configured run, the following command to create the CloudFormation stack in AWS.
 ```
-aws cloudformation create-stack --stack-name some-stack --template-body file://$PWD/stack.yml --profile exercise --region us-west-2
+aws cloudformation create-stack --stack-name exercise_stack --template-body file://$PWD/aws-stack.yml --profile exercise --region us-west-2
 ```
 8.  When the stack is **CREATE_COMPLETE** you need to go to Resources and click in the Physical ID of the EC2_Deploy and copy the public IP of the instance.
 9.  You have to configure a volumne for redis in the aws-docker-compose.yml using:
-```
-docker -H tcp://<public ip>:2375 volume create \
-  -d "cloudstor:aws" \
-  --opt ebstype=gp2 \
-  --opt size=10 \
-  --opt iops=1000 \
-  --opt backing=relocatable \
-  data-volume-1
-```
 10. Finally, you can run docker-compose -H tcp://public_ip:2375 up -f aws-docker-compose.yml
+11. When everything is up you can access through your browser to the public ip and it will show you the same page that you build with docker compose localy.
